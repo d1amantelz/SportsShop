@@ -1,0 +1,28 @@
+{% extends 'shop/base.html' %}
+
+
+
+{% block content %}
+
+<h1>Каталог магазина спортивных товаров SShop:</h1>
+<ul class="list-articles">
+    {% for p in products %}
+    <li>
+        <div class="article-panel">
+            <p class="last">Категория: {{p.category}}</p>
+        </div>
+
+        {% if p.photo %}
+            <p><img class="img-article-left thumb" src="{{p.photo.url}}"></p>
+        {% endif %}
+
+        <h2 class="product-header">{{ p.name }}</h2>
+        {{ p.description | linebreaks }}
+        <div class="clear"></div>
+        <p class="product-props"><span>Страна производитель: </span> {{ p.producing_country }}</p>
+        <p class="product-props"><span>Цена: </span>{{ p.price }}р.</p>
+        <p class="link-read-post"><a href="{{ p.get_absolute_url }}">Изменить</a></p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

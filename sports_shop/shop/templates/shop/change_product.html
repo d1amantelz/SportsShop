@@ -1,0 +1,23 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<form action="{% url 'product' product.pk %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for f in form %}
+    <p>
+        <label class="form-label" for="{{ f.id_for_label }}">
+            {{ f.label }}:
+        </label>
+        {% if f.name == 'photo' %}
+        <input type="file" class="upload-btn" name="{{ f.name }}">
+        {% else %}
+        {{ f }}
+        {% endif %}
+    </p>
+    {% endfor %}
+    <button type="submit">Изменить</button>
+</form>
+
+{% endblock %}
